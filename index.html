@@ -1,259 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Year of Us — For Junaid</title>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600&family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;600&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-  <style>
-    :root {
-      --bg-color: #fdf8f2;
-      --card-bg: #f7f0e6;
-      --text-brown: #3d2b1f;
-      --text-muted: #7c6859;
-      --accent-blue: #52aae9;
-      --border-color: #ebdcd0;
-      --gold-card: #fffdfa;
-      --gold-border: #e6c37c;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body { background-color: var(--bg-color); color: var(--text-brown); font-family: 'Plus Jakarta Sans', sans-serif; display: flex; flex-direction: column; align-items: center; min-height: 100vh; padding: 20px 15px; }
-    .app-container { max-width: 480px; width: 100%; text-align: center; }
-    .sub-heading { color: var(--accent-blue); font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
-    h1.main-title { font-family: 'Playfair Display', serif; font-size: 2.3rem; font-weight: 700; color: var(--text-brown); margin-bottom: 12px; }
-    p.intro-text { color: var(--text-muted); font-size: 0.9rem; line-height: 1.4; margin-bottom: 20px; }
-    
-    .audio-card { background: #ffffff; border: 1px solid var(--border-color); border-radius: 16px; padding: 15px; margin-bottom: 20px; text-align: left; }
-    .audio-card h4 { font-size: 0.85rem; color: var(--accent-blue); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
-    audio { width: 100%; height: 36px; margin-top: 5px; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Year of Us — For Junaid</title>
+    <style>
+        :root {
+            --bg-color: #f4efea;
+            --card-bg: #ffffff;
+            --accent-blue: #4aaef2;
+            --accent-gold: #e5a93c;
+            --text-main: #333333;
+            --text-muted: #777777;
+        }
 
-    .days-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    .day-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 16px 12px; text-align: left; cursor: pointer; position: relative; transition: transform 0.2s; }
-    .day-card:active { transform: scale(0.98); }
-    .day-card.gold { background: var(--gold-card); border: 2px solid var(--gold-border); }
-    .day-card.date-locked { opacity: 0.6; cursor: not-allowed; }
-    
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
-    .day-tag { font-size: 0.7rem; font-weight: 700; color: var(--accent-blue); letter-spacing: 1px; }
-    .day-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 600; color: var(--text-brown); }
-    
-    .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(61,43,31,0.5); display: none; justify-content: center; align-items: center; padding: 20px; z-index: 1000; }
-    .modal-card { background: var(--bg-color); border-radius: 20px; max-width: 420px; width: 100%; padding: 25px; text-align: center; border: 1px solid var(--border-color); position: relative; max-height: 85vh; overflow-y: auto; }
-    .close-btn { position: absolute; top: 12px; right: 15px; background: none; border: none; font-size: 1.5rem; color: var(--text-muted); cursor: pointer; }
-    .btn-blue { background-color: var(--accent-blue); color: #fff; border: none; padding: 12px 20px; font-weight: 600; border-radius: 25px; width: 100%; cursor: pointer; margin-top: 12px; font-size: 0.95rem; }
-    .input-field { width: 100%; padding: 12px; border: 1px solid var(--border-color); border-radius: 12px; margin: 12px 0; text-align: center; font-size: 1rem; }
-    .quiz-opt { background: var(--card-bg); border: 1px solid var(--border-color); padding: 10px; border-radius: 10px; margin: 6px 0; text-align: left; cursor: pointer; font-size: 0.9rem; }
-    .quiz-opt:hover { background: var(--border-color); }
-    .coupon-box { border: 2px dashed var(--accent-blue); background: #f0f8ff; border-radius: 12px; padding: 15px; margin-top: 12px; }
-  </style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            max-width: 600px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+
+        p.subtitle {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-top: 0;
+        }
+
+        .audio-banner {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 15px 20px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+
+        .audio-banner h4 {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+        }
+
+        audio {
+            width: 100%;
+            height: 36px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 15px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 100px;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .card.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+            background: #eae3db;
+        }
+
+        .card-number {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: var(--accent-blue);
+            text-transform: uppercase;
+        }
+
+        .card.gold .card-number {
+            color: var(--accent-gold);
+        }
+
+        .card-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin: 8px 0;
+        }
+
+        .icon {
+            font-size: 1rem;
+            align-self: flex-end;
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 16px;
+            padding: 25px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .modal h3 {
+            margin-top: 0;
+            color: #2c3e50;
+        }
+
+        .modal input[type="text"] {
+            width: 80%;
+            padding: 10px;
+            margin: 15px 0;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .modal button.btn {
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 85%;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .quiz-btn {
+            background: #f0f4f8;
+            border: 1px solid #d0d7de;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .quiz-btn:hover {
+            background: #e1e8ed;
+        }
+    </style>
 </head>
 <body>
 
-  <div class="app-container">
-    <div class="sub-heading">365 LITTLE PIECES OF US</div>
-    <h1 class="main-title">A Year of Us</h1>
-    <p class="intro-text">For my husband Junaid — one little space for our memories, inside jokes, and promises.</p>
+    <header>
+        <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #888;">365 Little Pieces of Us</p>
+        <h1>A Year of Us</h1>
+        <p class="subtitle">For my husband Junaid — one little space for our memories, inside jokes, and promises.</p>
+    </header>
 
-    <!-- Opening Voice Note Component -->
-    <div class="audio-card">
-      <h4>🎙️ Start Here — A Note From Me</h4>
-      <audio controls>
-        <source src="first_voicenote.m4a" type="audio/mpeg">
-        Your browser does not support the audio element.
-      </audio>
+    <div class="audio-banner">
+        <h4>🎙️ Start Here — A Note From Me</h4>
+        <audio controls src="first_voicenote.m4a">
+            Your browser does not support the audio element.
+        </audio>
     </div>
 
-    <div class="days-grid" id="daysGrid"></div>
-  </div>
+    <div class="grid" id="daysGrid"></div>
 
-  <div class="modal-overlay" id="modalOverlay">
-    <div class="modal-card">
-      <button class="close-btn" onclick="closeModal()">&times;</button>
-      <div id="modalContent"></div>
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modalCard">
+            <button class="close-btn" onclick="closeModal()">&times;</button>
+            <div id="modalContent"></div>
+        </div>
     </div>
-  </div>
 
-  <script>
-    // START DATE: Saturday, Sept 5, 2026 (Days 1-7 unlocked)
-    const startDate = new Date(2026, 8, 5); 
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script>
+        // START DATE: Sept 6, 2026
+        const startDate = new Date(2026, 8, 6);
 
-    const daysData = [
-      {
-        day: 1,
-        title: "The Beginning",
-        type: "pass",
-        pass: "gateway",
-        content: `<h3>Gateway Incident</h3><p style="margin-top:10px; line-height:1.5;">It all started with that small issue at Gateway with Nabeela. Who knew that random day would lead to my whole world changing?</p>`
-      },
-      {
-        day: 2,
-        title: "Zoey's Command",
-        type: "quiz",
-        q: "What did you do right after asking me Zoey's attack command?",
-        opts: ["Waited for my answer", "Left to go smoke and never asked again", "Petted Zoey", "Laughed at me"],
-        correct: 1,
-        content: `<h3>Zoey & Newcastle</h3><p style="margin-top:10px; line-height:1.5;">You asked what her attack command was and walked off to smoke before I could even explain! 😂 Typical Junaid moment on our way to Newcastle.</p>`
-      },
-      {
-        day: 3,
-        title: "First Impressions",
-        type: "pass",
-        pass: "dizzy",
-        content: `<h3>'Dizzy' vs 'I have to have him'</h3><p style="margin-top:10px; line-height:1.5;">Your impression of me: <b>"Dizzy"</b> (because I used to smoke and swear).<br><br>My impression of you: <b>"I have to have him, he's quiet, and I'm plotting!"</b> 😉</p>`
-      },
-      {
-        day: 4,
-        title: "Concert Bands & Shields",
-        type: "pass",
-        pass: "band",
-        content: `<h3>Newcastle Tactics</h3><p style="margin-top:10px; line-height:1.5;">I pretended not to know how to put on that concert band just so you'd put it on for me—and take it off later! Plus, you acting like my human shield when we almost got into a fight (and telling me NO to feeding you crab!).</p>`
-      },
-      {
-        day: 5,
-        title: "How We Started Dating",
-        type: "pass",
-        pass: "backyard",
-        content: `<h3>The Cold Night & The Hoodie</h3><p style="margin-top:10px; line-height:1.5;">Hiding in the backyard, holding hands in the lounge while chaos broke out, and standing outside in the cold at 1 AM for an hour and a half. You fixing my hoodie so my hair wouldn't show... leading right into that 4-hour talk until Saturday night.</p>`
-      },
-      {
-        day: 6,
-        title: "Braai Shield",
-        type: "coupon",
-        pass: "braai",
-        titleC: "Distance Coupon: Outfit Choice",
-        descC: "You pick my complete outfit for our next FaceTime date—no objections from me!",
-        content: `<h3>My Human Shield</h3><p style="margin-top:10px; line-height:1.5;">Way before we started talking: blowing wind at the braai, ash flying everywhere, and you coming behind me to shield me and holding my hand. I put my other hand right over yours and neither of us let go.</p>`
-      },
-      {
-        day: 7,
-        title: "Gold Milestone: Inside Jokes",
-        type: "pass",
-        pass: "skitz",
-        isGold: true,
-        content: `<h3>Skitz, Alleys, & Monopoly</h3><p style="margin-top:10px; line-height:1.5;">From calling Mum 'Alleys' and Dolo 'Cardiac', to playing Monopoly with Isti and Nono. Me shouting 'Skitz' and Isti laughing like he knew what was happening! Nothing ever goes unnoticed with us.</p>`
-      }
-    ];
+        const customDays = {
+            1: { title: "The Beginning", type: "pass", pass: "gateway", hint: "Hint: Where we first met", content: "Day 1 Memory: The very beginning of our journey together!" },
+            2: { title: "Zoey's Command", type: "quiz", content: "What did Zoey do when given her command?", options: ["Obeyed immediately", "Left to go smoke and never asked again", "Barked loudly"], correct: 1, successMsg: "Correct! That's Zoey for you! 😂" },
+            3: { title: "First Impressions", type: "pass", pass: "dizzy", hint: "Hint: How you made me feel", content: "You always keep my world spinning in the best way." },
+            4: { title: "Concert Bands & Shields", type: "pass", pass: "band", hint: "Hint: Live music setup", content: "Rocking through life together, one beat at a time." },
+            5: { title: "How We Started Dating", type: "pass", pass: "backyard", hint: "Hint: Where it became official", content: "That night in the backyard changed everything." },
+            6: { title: "Braai Shield", type: "pass", pass: "braai", hint: "Hint: Braai time", content: "Good food, best company, forever memories." },
+            7: { title: "Gold Milestone: Inside Jokes", type: "pass", pass: "skitz", hint: "Hint: Pure madness", content: "1 Week Complete! You match my energy like nobody else." },
+            10: { title: "A Special Voice Note", type: "pass", pass: "love", hint: "Hint: What we feel every day", content: "Press play to listen: <br><br><audio controls src='second_voicenote.m4a'></audio>" }
+        };
 
-    // Generate locked placeholders for days 8 through 365
-    for (let i = 8; i <= 365; i++) {
-      daysData.push({
-        day: i,
-        title: i === 30 || i === 50 || i === 100 || i === 365 ? `Gold Milestone — Day ${i}` : `Day ${String(i).padStart(3, '0')}`,
-        type: "locked",
-        isGold: i === 30 || i === 50 || i === 100 || i === 365
-      });
-    }
+        function getDayData(dayNum) {
+            if (customDays[dayNum]) {
+                return customDays[dayNum];
+            }
+            // Standard dynamic rotation for all other days
+            const keys = ["love", "memory", "together", "smile", "always"];
+            const passKey = keys[dayNum % keys.length];
+            return {
+                title: `Day ${String(dayNum).padStart(3, '0')}`,
+                type: "pass",
+                pass: passKey,
+                hint: `Hint: The password is '${passKey}'`,
+                content: `Memory for Day ${dayNum}: Another beautiful day together!`
+            };
+        }
 
-    function getUnlockedDayCount() {
-      const today = new Date();
-      const diffTime = today - startDate;
-      const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
-      return Math.max(7, 7 + diffDays); 
-    }
+        function renderGrid() {
+            const grid = document.getElementById("daysGrid");
+            grid.innerHTML = "";
+            const today = new Date();
+            
+            // Calculate current unlocked day index
+            const diffTime = today - startDate;
+            const currentUnlockedDay = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
 
-    function renderGrid() {
-      const grid = document.getElementById('daysGrid');
-      grid.innerHTML = '';
-      const maxUnlocked = getUnlockedDayCount();
+            for (let i = 1; i <= 365; i++) {
+                const cardData = getDayData(i);
+                const isUnlocked = i <= currentUnlockedDay;
+                const isGold = [7, 30, 50, 100, 200, 300, 365].includes(i);
 
-      daysData.forEach(item => {
-        const card = document.createElement('div');
-        const isDateLocked = item.day > maxUnlocked;
-        
-        card.className = `day-card ${item.isGold ? 'gold' : ''} ${isDateLocked ? 'date-locked' : ''}`;
-        card.onclick = () => openCard(item, isDateLocked);
-        
-        const lockIcon = isDateLocked ? '📅' : '🔒';
-        card.innerHTML = `
-          <div class="card-header">
-            <span class="day-tag">DAY ${String(item.day).padStart(3, '0')}</span>
-            <span>${lockIcon}</span>
-          </div>
-          <div class="day-title">${item.title}</div>
-        `;
-        grid.appendChild(card);
-      });
-    }
+                const card = document.createElement("div");
+                card.className = `card ${isUnlocked ? '' : 'locked'} ${isGold ? 'gold' : ''}`;
+                
+                card.innerHTML = `
+                    <div class="card-number">DAY ${String(i).padStart(3, '0')}</div>
+                    <div class="card-title">${cardData.title}</div>
+                    <div class="icon">${isUnlocked ? (isGold ? '⭐' : '🔓') : '🔒'}</div>
+                `;
 
-    function openCard(item, isDateLocked) {
-      const modal = document.getElementById('modalContent');
-      
-      if (isDateLocked) {
-        modal.innerHTML = `
-          <h3>🔒 Day ${item.day} is Locked</h3>
-          <p style="margin-top:15px; color:var(--text-muted);">No cheating! This day unlocks automatically on its schedule date. Check back then!</p>
-        `;
-      } else if (item.type === "pass") {
-        modal.innerHTML = `
-          <h3>${item.title}</h3>
-          <p style="font-size:0.85rem; color:var(--text-muted); margin-top:5px;">Enter the secret word to unlock:</p>
-          <input type="password" id="passInput" class="input-field" placeholder="Password...">
-          <button class="btn-blue" onclick="checkPass('${item.pass}', '${encodeURIComponent(item.content)}')">Unlock</button>
-        `;
-      } else if (item.type === "quiz") {
-        let optsHTML = item.opts.map((o, idx) => `<div class="quiz-opt" onclick="checkQuiz(${idx}, ${item.correct}, '${encodeURIComponent(item.content)}')">${o}</div>`).join('');
-        modal.innerHTML = `
-          <h3>${item.title}</h3>
-          <p style="margin:10px 0; font-weight:600;">${item.q}</p>
-          ${optsHTML}
-        `;
-      } else if (item.type === "coupon") {
-        modal.innerHTML = `
-          <h3>${item.title}</h3>
-          <input type="password" id="passInput" class="input-field" placeholder="Password...">
-          <button class="btn-blue" onclick="checkCoupon('${item.pass}', '${encodeURIComponent(item.content)}', '${item.titleC}', '${item.descC}')">Unlock Secret & Coupon</button>
-        `;
-      }
-      document.getElementById('modalOverlay').style.display = 'flex';
-    }
+                if (isUnlocked) {
+                    card.onclick = () => openCard(i);
+                } else {
+                    card.onclick = () => alert(`This day will unlock on Day ${i}!`);
+                }
 
-    function checkPass(correctPass, contentEncoded) {
-      const val = document.getElementById('passInput').value.trim().toLowerCase();
-      if (val === correctPass.toLowerCase()) {
-        triggerConfetti();
-        document.getElementById('modalContent').innerHTML = decodeURIComponent(contentEncoded);
-      } else {
-        alert("Incorrect password! Try again.");
-      }
-    }
+                grid.appendChild(card);
+            }
+        }
 
-    function checkQuiz(selected, correct, contentEncoded) {
-      if (selected === correct) {
-        triggerConfetti();
-        document.getElementById('modalContent').innerHTML = decodeURIComponent(contentEncoded);
-      } else {
-        alert("Wrong answer! Think back and try again.");
-      }
-    }
+        function openCard(dayNum) {
+            const data = getDayData(dayNum);
+            const modalContent = document.getElementById("modalContent");
+            
+            if (data.type === "pass") {
+                modalContent.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p style="font-size:0.85rem; color:#666;">${data.hint}</p>
+                    <input type="text" id="passInput" placeholder="Password">
+                    <br>
+                    <button class="btn" onclick="checkPass(${dayNum})">Unlock</button>
+                `;
+            } else if (data.type === "quiz") {
+                let optionsHTML = data.options.map((opt, idx) => 
+                    `<button class="quiz-btn" onclick="checkQuiz(${dayNum}, ${idx})">${opt}</button>`
+                ).join('');
+                
+                modalContent.innerHTML = `
+                    <h3>${data.title}</h3>
+                    <p>${data.content}</p>
+                    <div class="quiz-options">${optionsHTML}</div>
+                `;
+            }
 
-    function checkCoupon(correctPass, contentEncoded, titleC, descC) {
-      const val = document.getElementById('passInput').value.trim().toLowerCase();
-      if (val === correctPass.toLowerCase()) {
-        triggerConfetti();
-        document.getElementById('modalContent').innerHTML = `
-          ${decodeURIComponent(contentEncoded)}
-          <div class="coupon-box">
-            <h4 style="color:var(--accent-blue);">${titleC}</h4>
-            <p style="font-size:0.85rem; margin-top:5px;">${descC}</p>
-          </div>
-        `;
-      } else {
-        alert("Incorrect password!");
-      }
-    }
+            document.getElementById("modalOverlay").style.display = "flex";
+        }
 
-    function triggerConfetti() {
-      if (typeof confetti === 'function') {
-        confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-      }
-    }
+        function checkPass(dayNum) {
+            const input = document.getElementById("passInput").value.trim().toLowerCase();
+            const data = getDayData(dayNum);
+            if (input === data.pass.toLowerCase()) {
+                triggerConfetti();
+                document.getElementById("modalContent").innerHTML = `
+                    <h3 style="color:var(--accent-blue);">${data.title}</h3>
+                    <p style="font-size:1rem; margin:20px 0;">${data.content}</p>
+                `;
+            } else {
+                alert("Incorrect password!");
+            }
+        }
 
-    function closeModal() { document.getElementById('modalOverlay').style.display = 'none'; }
-    renderGrid();
-  </script>
+        function checkQuiz(dayNum, selectedIdx) {
+            const data = getDayData(dayNum);
+            if (selectedIdx === data.correct) {
+                triggerConfetti();
+                document.getElementById("modalContent").innerHTML = `
+                    <h3 style="color:var(--accent-blue);">${data.title}</h3>
+                    <p style="font-size:1rem; margin:20px 0;">${data.successMsg}</p>
+                `;
+            } else {
+                alert("Wrong answer! Try again.");
+            }
+        }
+
+        function triggerConfetti() {
+            if (typeof confetti === 'function') {
+                confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('modalOverlay').style.display = 'none';
+        }
+
+        renderGrid();
+    </script>
 </body>
 </html>
-
-
-
