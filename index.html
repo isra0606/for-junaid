@@ -237,199 +237,73 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        // START DATE: Sept 6, 2025
-        const startDate = new Date(2025, 0, 1);
+     // ==========================================
+    // START DATE CONFIGURATION
+    // Format: new Date(YEAR, MONTH_INDEX, DAY)
+    // Note: Month is 0-indexed (0=Jan, 8=Sept, 9=Oct)
+    // ==========================================
+    const startDate = new Date(2026, 8, 6); 
 
-        const customDays = {
-            1: { title: "Where It All Began", type: "pass", pass: "gateway", hint: "Hint: Where we first met because of Nabeela", content: "That tiny issue at Gateway with Nabeela brought you into my life. The best accident ever! ❤️" },
-            2: { title: "Zoey's Attack Command", type: "quiz", content: "What happened when you asked for Zoey's attack command?", options: ["I told you immediately", "You went to smoke and never asked again", "Zoey barked at you"], correct: 1, successMsg: "Spot on! You walked away to smoke on the way to Newcastle and never mentioned it again! 😂" },
-            3: { title: "First Impressions", type: "pass", pass: "dizzy", hint: "Hint: Your exact word for me", content: "You called me 'dizzy' because I was smoking and swearing... meanwhile I was silently plotting how to make you mine! 😈" },
-            4: { title: "Concert Bands & Fights", type: "quiz", content: "What did I ask you to do with the concert bands in Newcastle?", options: ["Put them on and take them off for me", "Throw them away", "Buy new ones"], correct: 0, successMsg: "Yes! I pretended not to know how to put it on just to get close to you! And then almost fought someone! 😂" },
-            5: { title: "How We Started Dating", type: "pass", pass: "backyard", hint: "Hint: Where I took you during the argument", content: "I hid behind you in the lounge, you held my hand to tell me it's okay, and we stayed up talking outside in the cold till sunrise. ❤️" },
-            6: { title: "The Braai Shield", type: "pass", pass: "braai", hint: "Hint: What you became when the ash blew", content: "Way before we were talking, you stood in front of me like a human shield to block the burning bits. I put both my hands over yours and never let go. 🔥" },
-            7: { title: "Gold Milestone: Inside Jokes", type: "pass", pass: "skitz", hint: "Hint: Nono's official nickname", content: "1 Week Complete! From Skitz to Cardiac to Alleys and ADHD... nobody gets our humor like you do! ⭐" },
-            8: { title: "The Human Shield Tradition", type: "pass", pass: "rat", hint: "Hint: What terrorized the backyard", content: "Whenever the rats ran around, I ran straight to you and stood behind my human shield! 🐀" },
-            9: { title: "Thunee Masterclass", type: "quiz", content: "What was our first actual quality time spent doing?", options: ["Watching movies", "You teaching me Thunee", "Baking cakes"], correct: 1, successMsg: "Correct! Teaching me Thunee was where it all started! ♠️♥️" },
-            10: { title: "A Special Voice Note", type: "pass", pass: "love", hint: "Hint: What we feel every day", content: "Press play to listen: <br><br><audio controls src='second_voicenote.m4a'></audio>" },
-            11: { title: "Your Favorite Dish", type: "quiz", content: "Which meal made by me reigns supreme?", options: ["Samp and beans / Mutton Akni", "Burger and chips", "Pasta"], correct: 0, successMsg: "You know it! Mutton Akni & Samp and Beans forever! 🍲" },
-            12: { title: "The Morning Routine", type: "pass", pass: "water", hint: "Hint: What you drink right after smoking", content: "Smoke, drink water, burp on FaceTime, and morning bathroom trip—your exact routine! 🧼" },
-            13: { title: "Your Ultimate Dream", type: "pass", pass: "upup", hint: "Hint: Two words for being rich in money & home", content: "WE ARE GOING UP UP! Rich in wealth, rich in peace, traveling the world, and taking our kids to Umrah & Hajj! 🕋✈️" },
-            14: { title: "The Musalah Secret", type: "pass", pass: "musalah", hint: "Hint: My favorite prayer mat", content: "I was deeply attached to that specific musalah before I even knew it was yours! Allah wrote us together in every detail. 🤲" },
-            15: { title: "The Monopoly Incident", type: "quiz", content: "Why did Isti laugh when I called Nono 'Skitz' during Monopoly?", options: ["He knew what it meant", "He had massive FOMO and pretended to understand", "It was actually funny"], correct: 1, successMsg: "Correct! Isti had total FOMO and laughed like he was in on the joke! 🪙" },
-            16: { title: "Your Religion Journey", type: "pass", pass: "bravery", hint: "Hint: What I admire most about your step into Islam", content: "I admire your courage and heart every single day. Seeing you learn and grow in Islam makes my heart overflow. 🕌" },
-            17: { title: "The Scarf Respect", type: "pass", pass: "respect", hint: "Hint: Why you love seeing me in a scarf", content: "You always want me in my scarf because you see it as ultimate respect. I love that about you, my husband." },
-            18: { title: "The FaceTime Special", type: "pass", pass: "burp", hint: "Hint: What you do in my face over video call", content: "Only you would burp straight into the camera after eating and expect me to smile! 😂" },
-            19: { title: "Islamic History Night", type: "pass", pass: "stories", hint: "Hint: What I love telling you before bed", content: "I love teaching you Islamic history and answering all your questions. Learning together is my peace." },
-            20: { title: "Peter Stuyvesant or Peter Jackson?", type: "quiz", content: "Which specific smell always brings you straight to my mind?", options: ["Pall Mall Blue", "Marlboro Red", "Dunhill Switch"], correct: 0, successMsg: "Pall Mall Blue! That exact scent is instantly Junaid! 🚬" },
-            21: { title: "Nicknames for the Family", type: "quiz", content: "What is Dolo's official nickname?", options: ["ADHD", "Cardiac", "Alleys"], correct: 1, successMsg: "Cardiac! (Mum is Alleys, Nono is Skitz, and Isti is ADHD) 😂" },
-            22: { title: "The Hoody Incident", type: "pass", pass: "hoodie", hint: "Hint: What you fixed at 1 AM outside", content: "You tucked my hair back inside my hoodie late at night outside so no one would see. Protectiveness level 100!" },
-            23: { title: "Ayatul Kursi Guard", type: "pass", pass: "protection", hint: "Hint: What I recite over you", content: "I always read Ayatul Kursi over you. Wherever you are, Allah's protection is with you." },
-            24: { title: "Broken Doors", type: "pass", pass: "bathroom", hint: "Hint: The room with no context needed", content: "Zero context needed. Just... bathroom doors! 🚪💥" },
-            25: { title: "Number Machine", type: "pass", pass: "brain", hint: "Hint: What I call your intellect", content: "Your brain is literally a numbers machine. I admire how smart you are every single day!" },
-            26: { title: "Your Number 1 Team", type: "quiz", content: "Which football club has your whole heart?", options: ["Man City", "Real Madrid", "Arsenal"], correct: 0, successMsg: "City blue all the way! ⚽" },
-            27: { title: "Your Music Vibe", type: "quiz", content: "Who dominates your playlist alongside UK Drill?", options: ["Drake & Kanye", "The Weeknd & J. Cole", "Eminem & 50 Cent"], correct: 1, successMsg: "The Weeknd & J. Cole on repeat! 🎶" },
-            28: { title: "The Crab Attempt", type: "pass", pass: "crab", hint: "Hint: What I tried to feed you in Newcastle", content: "I tried to feed you crab so nicely and you straight up said NO! 🦀" },
-            29: { title: "Ramadan Love Note", type: "pass", pass: "arabic", hint: "Hint: Our ongoing tradition every day of Ramadan", content: "Every single day of Ramadan, an Arabic quote about my love for you. Always and forever." },
-            30: { title: "Gold Milestone: 1 Month!", type: "pass", pass: "jaan", hint: "Hint: My sweetest name for you", content: "1 MONTH DOWN! You are my Jaan, my husband, and my best friend. ⭐" }
+    // Specific Story-Driven Days (1 to 15)
+    const storyDays = {
+      1: { title: "The Gateway Incident", type: "pass", pass: "gateway", hint: "Hint: Where we first met because of Nabeela", content: "It all started at Gateway. You were there with your cousin Nabeela, dealing with a small issue, completely unaware that this tiny moment was setting off the dominoes for our entire story." },
+      2: { title: "Zoey's Attack Command", type: "quiz", content: "What happened when you asked for Zoey's attack command?", options: ["Junaid explained it immediately", "Junaid walked off to smoke and forgot", "Zoey actually attacked someone", "Israa forgot the command"], pass: "Junaid walked off to smoke and forgot", hint: "Hint: Think about what Junaid casually stepped away to do..." },
+      3: { title: "The Newcastle Trip", type: "pass", pass: "dizzy", hint: "Hint: Your exact word for me", content: "Travelling to Newcastle to visit your grandmother. That road trip was filled with so much lowkey tension and unspoken plotting." },
+      4: { title: "The Wristband Plot", type: "quiz", content: "What did Israa pretend she couldn't do with the wristbands?", options: ["Put it on by herself", "Take it off by herself", "Both put it on and take it off", "Find where she placed it"], pass: "Both put it on and take it off", hint: "Hint: Masterclass plotting—asking for help twice!" },
+      5: { title: "Israa the Fighter", type: "pass", pass: "backyard", hint: "Hint: How Junaid describes how ready you were to fight that stranger", content: "Remember when we nearly got into a fight with someone? Junaid STILL laughs to this day about how ridiculously eager you were to jump into the fight." },
+      6: { title: "The Car Park Talks", type: "pass", pass: "braai", hint: "Hint: Where we sat talking for hours before anyone knew", content: "Sitting in the car park for hours, just talking about everything and nothing before anyone else caught on." },
+      7: { title: "Unspoken Connections", type: "quiz", content: "What was the unspoken energy between us during the early days?", options: ["Total awkward silence", "Lowkey tension and secret plotting", "Pure casual friendship", "Constant arguing"], pass: "Lowkey tension and secret plotting", hint: "Hint: Everyone else missed it, but we both knew." },
+      8: { title: "Midnight Munchies", type: "pass", pass: "rat", hint: "Hint: Our late-night food trip during the road trip", content: "Sneaking out for late-night snacks when everyone else was already asleep." },
+      9: { title: "Caught Looking", type: "quiz", content: "What was our first actual quality time spent doing?", options: ["Watching a movie together", "Deep talks late at night", "Going out for dinner", "Driving around listening to music"], pass: "Deep talks late at night", hint: "Hint: It kept us up way past bedtime." },
+      10: { title: "The Human Shield (Braai)", type: "pass", pass: "love", hint: "Hint: What Junaid became when burnt pieces were blowing on you", content: "BEFORE we were even talking, during a braai at home, burnt pieces were about to land on you when Junaid stepped in from behind, grabbed your hand, and stood in front of you like a shield." },
+      11: { title: "Late Night Whispers", type: "quiz", content: "Where were we standing during our freezing 1:00 AM talk?", options: ["In the living room", "Outside in the cold", "In the kitchen", "In the car"], pass: "Outside in the cold", hint: "Hint: The weather gave us the perfect excuse to stand close!" },
+      12: { title: "Sparks in the Silence", type: "pass", pass: "water", hint: "Hint: The moment that sent electricity without saying a word", content: "That electric feeling when nothing was being said out loud, but both of us knew exactly what was happening." },
+      13: { title: "1:00 AM in the Cold", type: "pass", pass: "upup", hint: "Hint: The time of night we stood outside keeping warm", content: "Around 1:00 AM, we went outside. It was freezing cold, so you stepped closer to Junaid. He pulled you in close and held you warm for an hour and a half." },
+      14: { title: "No Coincidences", type: "quiz", content: "How did all our 'accidental' moments start feeling over time?", options: ["Completely random", "Completely intentional", "Slightly annoying", "Pure luck"], pass: "Completely intentional", hint: "Hint: None of it was actually an accident." },
+      15: { title: "The All-Nighter", type: "quiz", content: "How long was our official deep talk that started everything?", options: ["30 minutes", "1 hour", "2 to 4 hours", "All day"], pass: "2 to 4 hours", hint: "Hint: It lasted right through until Saturday night!" },
+      365: { title: "THE LAST DAY ISN'T REALLY THE LAST", type: "pass", pass: "forever", hint: "Hint: The word that describes how long this story goes on...", content: "365 days of us. Every single piece leads right back to where we belong. Forever and always." }
+    };
+
+    // Dynamically generate Unique Days 16 through 364
+    const generatedDays = {};
+    const titleThemes = [
+      "Unspoken Magic", "Late Night Drives", "Inside Jokes", "Quiet Moments", "Endless Laughter",
+      "Shared Secrets", "The Unplanned Plot", "Coffee & Conversations", "Stargazing Thoughts",
+      "Our Favorite Song", "Unfiltered Talks", "The Little Details", "Comfortable Silences",
+      "A Memory to Keep", "Midnight Thoughts", "Simple Joy", "Sweet Coincidences", "Warm Hugs"
+    ];
+
+    const quizQuestions = [
+      { q: "Who is more likely to start a random conversation late at night?", options: ["Israa", "Junaid", "Both equally", "Neither"], a: "Both equally" },
+      { q: "What makes our story so uniquely ours?", options: ["The unplanned moments", "The endless laughs", "The deep talks", "All of the above"], a: "All of the above" },
+      { q: "What is the key to unlocking every good memory?", options: ["Patience", "Love", "A good joke", "Time together"], a: "Love" },
+      { q: "How many days are in this special grid?", options: ["100", "180", "365", "500"], a: "365" }
+    ];
+
+    for (let i = 16; i < 365; i++) {
+      const theme = titleThemes[i % titleThemes.length];
+      const isQuiz = (i % 4 === 0); // Every 4th day gets a unique quiz
+
+      if (isQuiz) {
+        const quizData = quizQuestions[i % quizQuestions.length];
+        generatedDays[i] = {
+          title: `${theme} #${i}`,
+          type: "quiz",
+          content: quizData.q,
+          options: quizData.options,
+          pass: quizData.a,
+          hint: `Hint: Think about ${theme.toLowerCase()} piece #${i}...`
         };
+      } else {
+        generatedDays[i] = {
+          title: `${theme} #${i}`,
+          type: "pass",
+          pass: `day${i}`,
+          hint: `Hint: Enter 'day${i}' to unlock this memory`,
+          content: `Piece #${i} of our journey. Another unforgettable moment stored in our story.`
+        };
+      }
+    }
 
-        // Bank of romantic quotes, islamic history, inside jokes, and quizzes for Days 31-365
-        const islamicHistory = [
-            "Did you know? Prophet Muhammad (SAW) loved racing with Sayyidatina Aisha (RA)!",
-            "Hadith: 'The best of you are those who are best to their wives.' — Tirmidhi",
-            "Dua: 'Rabbana hab lana min azwajina wa dhurriyatina qurrata a'yunin' (Our Lord, grant us in our spouses comfort for our eyes).",
-            "Islamic fact: The Prophet (SAW) used to drink from the exact same spot on the cup where Aisha (RA) drank.",
-            "Reminder: Making Dua for your spouse in secret is one of the purest forms of love."
-        ];
-
-        const romanticQuotes = [
-            "In every du'a I make, your name comes first.",
-            "I look at you and see my home, my peace, and my Jannah.",
-            "From Newcastle to forever, I'm plotting to keep you by my side.",
-            "Even when you tell me to leave you alone, I'm staying right here!",
-            "You are my Mr. Reddy, my Pup, my Husband."
-        ];
-
-        function getDayData(dayNum) {
-            if (customDays[dayNum]) {
-                return customDays[dayNum];
-            }
-
-            // Auto-generated interactive days for 31-365
-            const passKeys = ["husband", "jaan", "mancity", "pink", "samp", "daddy", "snotty", "pup", "jole", "weeknd"];
-            const passKey = passKeys[dayNum % passKeys.length];
-
-            if (dayNum % 3 === 0) {
-                // Islamic learning / Quote day
-                const fact = islamicHistory[dayNum % islamicHistory.length];
-                return {
-                    title: `Day ${String(dayNum).padStart(3, '0')} — Islamic Reflection`,
-                    type: "pass",
-                    pass: passKey,
-                    hint: `Hint: Password is '${passKey}'`,
-                    content: `<strong>Daily Deen & Love:</strong><br><br>"${fact}"<br><br>I love teaching and learning with you, Junaid. 🤲`
-                };
-            } else if (dayNum % 3 === 1) {
-                // Interactive Quiz Day
-                return {
-                    title: `Day ${String(dayNum).padStart(3, '0')} — Quick Quiz`,
-                    type: "quiz",
-                    content: `Quick check for Day ${dayNum}: What is Junaid's absolute favorite color?`,
-                    options: ["Pink", "Blue", "Black"],
-                    correct: 0,
-                    successMsg: "Correct! Pink looks best on my husband anyway! 💕"
-                };
-            } else {
-                // Love note day
-                const note = romanticQuotes[dayNum % romanticQuotes.length];
-                return {
-                    title: `Day ${String(dayNum).padStart(3, '0')} — Note For You`,
-                    type: "pass",
-                    pass: passKey,
-                    hint: `Hint: Password is '${passKey}'`,
-                    content: `<strong>To my Husband:</strong><br><br>"${note}"<br><br>Thinking of you while doing my mehndi/namaaz today! ❤️`
-                };
-            }
-        }
-
-        function renderGrid() {
-            const grid = document.getElementById("daysGrid");
-            grid.innerHTML = "";
-            const today = new Date();
-            
-            const diffTime = today - startDate;
-            const currentUnlockedDay = Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
-
-            for (let i = 1; i <= 365; i++) {
-                const cardData = getDayData(i);
-                const isUnlocked = i <= currentUnlockedDay;
-                const isGold = [7, 30, 50, 100, 200, 300, 365].includes(i);
-
-                const card = document.createElement("div");
-                card.className = `card ${isUnlocked ? '' : 'locked'} ${isGold ? 'gold' : ''}`;
-                
-                card.innerHTML = `
-                    <div class="card-number">DAY ${String(i).padStart(3, '0')}</div>
-                    <div class="card-title">${cardData.title}</div>
-                    <div class="icon">${isUnlocked ? (isGold ? '⭐' : '🔓') : '🔒'}</div>
-                `;
-
-                if (isUnlocked) {
-                    card.onclick = () => openCard(i);
-                } else {
-                    card.onclick = () => alert(`This day will unlock on Day ${i}!`);
-                }
-
-                grid.appendChild(card);
-            }
-        }
-
-        function openCard(dayNum) {
-            const data = getDayData(dayNum);
-            const modalContent = document.getElementById("modalContent");
-            
-            if (data.type === "pass") {
-                modalContent.innerHTML = `
-                    <h3>${data.title}</h3>
-                    <p style="font-size:0.85rem; color:#666;">${data.hint}</p>
-                    <input type="text" id="passInput" placeholder="Password">
-                    <br>
-                    <button class="btn" onclick="checkPass(${dayNum})">Unlock</button>
-                `;
-            } else if (data.type === "quiz") {
-                let optionsHTML = data.options.map((opt, idx) => 
-                    `<button class="quiz-btn" onclick="checkQuiz(${dayNum}, ${idx})">${opt}</button>`
-                ).join('');
-                
-                modalContent.innerHTML = `
-                    <h3>${data.title}</h3>
-                    <p>${data.content}</p>
-                    <div class="quiz-options">${optionsHTML}</div>
-                `;
-            }
-
-            document.getElementById("modalOverlay").style.display = "flex";
-        }
-
-        function checkPass(dayNum) {
-            const input = document.getElementById("passInput").value.trim().toLowerCase();
-            const data = getDayData(dayNum);
-            if (input === data.pass.toLowerCase()) {
-                triggerConfetti();
-                document.getElementById("modalContent").innerHTML = `
-                    <h3 style="color:var(--accent-blue);">${data.title}</h3>
-                    <p style="font-size:1rem; margin:20px 0;">${data.content}</p>
-                `;
-            } else {
-                alert("Incorrect password!");
-            }
-        }
-
-        function checkQuiz(dayNum, selectedIdx) {
-            const data = getDayData(dayNum);
-            if (selectedIdx === data.correct) {
-                triggerConfetti();
-                document.getElementById("modalContent").innerHTML = `
-                    <h3 style="color:var(--accent-blue);">${data.title}</h3>
-                    <p style="font-size:1rem; margin:20px 0;">${data.successMsg}</p>
-                `;
-            } else {
-                alert("Wrong answer! Try again.");
-            }
-        }
-
-        function triggerConfetti() {
-            if (typeof confetti === 'function') {
-                confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('modalOverlay').style.display = 'none';
-        }
-
-        renderGrid();
-    </script>
-</body>
-</html>
+    // Combine custom story days and generated days seamlessly
+    const customDays = { ...storyDays, ...generatedDays };
