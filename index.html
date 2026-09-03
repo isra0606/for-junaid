@@ -1,250 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Year of Us — For Junaid</title>
-    <style>
-        :root {
-            --bg-color: #f4efea;
-            --card-bg: #ffffff;
-            --accent-blue: #4aaef2;
-            --accent-gold: #e5a93c;
-            --text-main: #333333;
-            --text-muted: #777777;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Year of Us — For Junaid ♡</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-main);
-            margin: 0;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
+  <style>
+    :root {
+      --bg-cream: #FFFDF9;
+      --card-bg: #FFFFFF;
+      --primary-blue: #38BDF8;
+      --soft-blue: #E0F2FE;
+      --warm-brown: #8C6D58;
+      --gold-accent: #D97706;
+      --text-dark: #292524;
+      --text-muted: #78716C;
+      --font-handwriting: 'Caveat', cursive;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
 
-        header {
-            text-align: center;
-            max-width: 600px;
-            margin-bottom: 25px;
-        }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      font-family: var(--font-body);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
 
-        h1 {
-            font-size: 2rem;
-            margin-bottom: 8px;
-            color: #2c3e50;
-        }
+    /* LANDING / OPENING PAGE */
+    #landingPage {
+      text-align: center;
+      max-width: 550px;
+      background: var(--card-bg);
+      padding: 40px 24px;
+      border-radius: 24px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      border: 2px solid #F3F4F6;
+    }
+    #landingPage h1 {
+      font-family: var(--font-handwriting);
+      font-size: 3.5rem;
+      color: var(--warm-brown);
+      margin-bottom: 10px;
+    }
+    #landingPage p {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      line-height: 1.6;
+    }
+    .enter-btn {
+      background-color: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 14px 32px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .enter-btn:hover { transform: translateY(-2px); }
 
-        p.subtitle {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            margin-top: 0;
-        }
+    /* MAIN CONTENT PAGE */
+    #mainContent {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      text-align: center;
+    }
+    header h1 {
+      font-family: var(--font-handwriting);
+      font-size: 3.5rem;
+      color: var(--warm-brown);
+      margin-bottom: 6px;
+    }
+    .subtitle {
+      font-family: var(--font-handwriting);
+      font-size: 1.6rem;
+      color: var(--gold-accent);
+      margin-bottom: 20px;
+    }
+    .timer-card {
+      background: white;
+      border-radius: 20px;
+      padding: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      margin-bottom: 25px;
+      border: 2px solid var(--soft-blue);
+      font-weight: 600;
+    }
 
-        .audio-banner {
-            background: var(--card-bg);
-            border-radius: 12px;
-            padding: 15px 20px;
-            width: 100%;
-            max-width: 500px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            margin-bottom: 25px;
-            box-sizing: border-box;
-            text-align: center;
-        }
+    /* GRID & CARDS */
+    .day-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+      gap: 12px;
+      width: 100%;
+    }
+    .day-card {
+      background: var(--card-bg);
+      border: 2px solid #F3F4F6;
+      border-radius: 16px;
+      padding: 16px 8px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .day-card.unlocked { background: #F0FDF4; border-color: #86EFAC; }
+    .day-card.locked { opacity: 0.6; cursor: not-allowed; background: #F9FAFB; }
+    .day-number { font-size: 0.9rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
 
-        .audio-banner h4 {
-            margin: 0 0 10px 0;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--accent-blue);
-        }
-
-        audio {
-            width: 100%;
-            height: 36px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 15px;
-            width: 100%;
-            max-width: 800px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 100px;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-        }
-
-        .card.locked {
-            opacity: 0.6;
-            cursor: not-allowed;
-            background: #eae3db;
-        }
-
-        .card-number {
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: var(--accent-blue);
-            text-transform: uppercase;
-        }
-
-        .card.gold .card-number {
-            color: var(--accent-gold);
-        }
-
-        .card-title {
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin: 8px 0;
-        }
-
-        .icon {
-            font-size: 1rem;
-            align-self: flex-end;
-        }
-
-        /* Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-
-        .modal {
-            background: #fff;
-            border-radius: 16px;
-            padding: 25px;
-            max-width: 400px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal h3 {
-            margin-top: 0;
-            color: #2c3e50;
-        }
-
-        .modal input[type="text"] {
-            width: 80%;
-            padding: 10px;
-            margin: 15px 0;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            text-align: center;
-            font-size: 1rem;
-        }
-
-        .modal button.btn {
-            background: var(--accent-blue);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 1rem;
-            cursor: pointer;
-            width: 85%;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #aaa;
-        }
-
-        .quiz-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        .quiz-btn {
-            background: #f0f4f8;
-            border: 1px solid #d0d7de;
-            padding: 10px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            text-align: left;
-        }
-
-        .quiz-btn:hover {
-            background: #e1e8ed;
-        }
-    </style>
+    /* MODAL POPUP */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(41, 37, 36, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+    }
+    .modal-card {
+      background: var(--card-bg);
+      border-radius: 24px;
+      width: 100%;
+      max-width: 500px;
+      padding: 30px 20px;
+      position: relative;
+      text-align: center;
+    }
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 20px;
+      background: #F3F4F6;
+      border: none;
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .modal-input {
+      padding: 12px;
+      border: 2px solid #E5E7EB;
+      border-radius: 12px;
+      font-size: 1rem;
+      width: 80%;
+      margin: 15px 0;
+      text-align: center;
+    }
+    .btn-action {
+      background: var(--primary-blue);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .quiz-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 15px;
+    }
+    .quiz-opt-btn {
+      background: var(--soft-blue);
+      border: 1px solid var(--primary-blue);
+      padding: 10px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: 600;
+    }
+    audio {
+      width: 100%;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 <body>
 
+  <div id="landingPage">
+    <h1>A Year of Us</h1>
+    <p>365 days, 365 memories, and a million reasons why you mean the world to me. Welcome to our space, Junaid ♡</p>
+    <button class="enter-btn" onclick="enterSite()">Begin Our Journey</button>
+  </div>
+
+  <div id="mainContent">
     <header>
-        <p style="font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; color: #888;">365 Little Pieces of Us</p>
-        <h1>A Year of Us</h1>
-        <p class="subtitle">For my husband Junaid — one little space for our memories, inside jokes, and promises.</p>
+      <div style="font-size:1.1rem; font-weight:700; color:var(--primary-blue); letter-spacing:2px; text-transform:uppercase;">Israa ♡ Junaid</div>
+      <h1>For Junaid</h1>
+      <p class="subtitle">“Every single day brings a new piece of us.”</p>
+      <div class="timer-card" id="timerBox">Calculating unlock date...</div>
     </header>
 
-    <div class="audio-banner">
-        <h4>🎙️ Start Here — A Note From Me</h4>
-        <audio controls src="first_voicenote.m4a">
-            Your browser does not support the audio element.
-        </audio>
+    <div class="day-grid" id="dayGrid"></div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-card">
+      <button class="close-btn" onclick="closeModal()">&times;</button>
+      <div id="modalBody"></div>
     </div>
+  </div>
 
-    <div class="grid" id="daysGrid"></div>
-
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal" id="modalCard">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <div id="modalContent"></div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-     // ==========================================
-    // START DATE CONFIGURATION
-    // Format: new Date(YEAR, MONTH_INDEX, DAY)
-    // Note: Month is 0-indexed (0=Jan, 8=Sept, 9=Oct)
+  <script>
     // ==========================================
-    const startDate = new Date(2026, 8, 6); 
+    // START DATE CONFIGURATION (YEAR, MONTH, DAY)
+    // Note: Month index 8 = September
+    // ==========================================
+    const startDate = new Date(2026, 8, 6);
 
-    // Specific Story-Driven Days (1 to 15)
+    // Hand-crafted story memories (Days 1 to 15 & Day 365)
     const storyDays = {
       1: { title: "The Gateway Incident", type: "pass", pass: "gateway", hint: "Hint: Where we first met because of Nabeela", content: "It all started at Gateway. You were there with your cousin Nabeela, dealing with a small issue, completely unaware that this tiny moment was setting off the dominoes for our entire story." },
       2: { title: "Zoey's Attack Command", type: "quiz", content: "What happened when you asked for Zoey's attack command?", options: ["Junaid explained it immediately", "Junaid walked off to smoke and forgot", "Zoey actually attacked someone", "Israa forgot the command"], pass: "Junaid walked off to smoke and forgot", hint: "Hint: Think about what Junaid casually stepped away to do..." },
@@ -252,58 +230,172 @@
       4: { title: "The Wristband Plot", type: "quiz", content: "What did Israa pretend she couldn't do with the wristbands?", options: ["Put it on by herself", "Take it off by herself", "Both put it on and take it off", "Find where she placed it"], pass: "Both put it on and take it off", hint: "Hint: Masterclass plotting—asking for help twice!" },
       5: { title: "Israa the Fighter", type: "pass", pass: "backyard", hint: "Hint: How Junaid describes how ready you were to fight that stranger", content: "Remember when we nearly got into a fight with someone? Junaid STILL laughs to this day about how ridiculously eager you were to jump into the fight." },
       6: { title: "The Car Park Talks", type: "pass", pass: "braai", hint: "Hint: Where we sat talking for hours before anyone knew", content: "Sitting in the car park for hours, just talking about everything and nothing before anyone else caught on." },
-      7: { title: "Unspoken Connections", type: "quiz", content: "What was the unspoken energy between us during the early days?", options: ["Total awkward silence", "Lowkey tension and secret plotting", "Pure casual friendship", "Constant arguing"], pass: "Lowkey tension and secret plotting", hint: "Hint: Everyone else missed it, but we both knew." },
-      8: { title: "Midnight Munchies", type: "pass", pass: "rat", hint: "Hint: Our late-night food trip during the road trip", content: "Sneaking out for late-night snacks when everyone else was already asleep." },
-      9: { title: "Caught Looking", type: "quiz", content: "What was our first actual quality time spent doing?", options: ["Watching a movie together", "Deep talks late at night", "Going out for dinner", "Driving around listening to music"], pass: "Deep talks late at night", hint: "Hint: It kept us up way past bedtime." },
-      10: { title: "The Human Shield (Braai)", type: "pass", pass: "love", hint: "Hint: What Junaid became when burnt pieces were blowing on you", content: "BEFORE we were even talking, during a braai at home, burnt pieces were about to land on you when Junaid stepped in from behind, grabbed your hand, and stood in front of you like a shield." },
-      11: { title: "Late Night Whispers", type: "quiz", content: "Where were we standing during our freezing 1:00 AM talk?", options: ["In the living room", "Outside in the cold", "In the kitchen", "In the car"], pass: "Outside in the cold", hint: "Hint: The weather gave us the perfect excuse to stand close!" },
-      12: { title: "Sparks in the Silence", type: "pass", pass: "water", hint: "Hint: The moment that sent electricity without saying a word", content: "That electric feeling when nothing was being said out loud, but both of us knew exactly what was happening." },
-      13: { title: "1:00 AM in the Cold", type: "pass", pass: "upup", hint: "Hint: The time of night we stood outside keeping warm", content: "Around 1:00 AM, we went outside. It was freezing cold, so you stepped closer to Junaid. He pulled you in close and held you warm for an hour and a half." },
-      14: { title: "No Coincidences", type: "quiz", content: "How did all our 'accidental' moments start feeling over time?", options: ["Completely random", "Completely intentional", "Slightly annoying", "Pure luck"], pass: "Completely intentional", hint: "Hint: None of it was actually an accident." },
-      15: { title: "The All-Nighter", type: "quiz", content: "How long was our official deep talk that started everything?", options: ["30 minutes", "1 hour", "2 to 4 hours", "All day"], pass: "2 to 4 hours", hint: "Hint: It lasted right through until Saturday night!" },
+      7: { title: "Unspoken Connections", type: "pass", pass: "skitz", hint: "Hint: Nono's official nickname", content: "The silent connection everyone else missed during the trip. Everything was shifting without us saying a word." },
+      8: { title: "Midnight Munchies", type: "pass", pass: "rat", hint: "Hint: What terrorized the backyard", content: "Sneaking out for late-night snacks when everyone else was already asleep." },
+      9: { title: "Voice Note Memory", type: "voice", pass: "voicenote", hint: "Hint: Enter 'voicenote' to listen to this audio message!", audioFile: "voicenote.m4a", content: "Listen to this special voice note memory below:" },
+      10: { title: "The Human Shield (Braai)", type: "pass", pass: "love", hint: "Hint: What we feel every day", content: "BEFORE we were even talking, during a braai at home, burnt pieces were about to land on you when Junaid stepped in from behind, grabbed your hand, and stood in front of you like a shield." },
+      11: { title: "Late Night Whispers", type: "quiz", content: "Which meal made by me reigns supreme?", options: ["Samp and beans", "Braai meat", "Butter chicken", "Pasta"], pass: "Samp and beans", hint: "Hint: The absolute favorite dish!" },
+      12: { title: "Sparks in the Silence", type: "pass", pass: "water", hint: "Hint: What you drink right after smoking", content: "That electric feeling when nothing was being said out loud, but both of us knew exactly what was happening." },
+      13: { title: "1:00 AM in the Cold", type: "pass", pass: "upup", hint: "Hint: Two words for being rich in money & hone", content: "Around 1:00 AM, we went outside. It was freezing cold, so you stepped closer to Junaid. He pulled you in close and held you warm for an hour and a half." },
+      14: { title: "No Coincidences", type: "pass", pass: "musalah", hint: "Hint: My favorite prayer mat", content: "How every little moment started feeling completely intentional..." },
+      15: { title: "The Monopoly Incident", type: "quiz", content: "Why did Isti laugh when I called Nono 'Skitz' during Monopoly?", options: ["Because it was completely random", "Because Nono got mad", "Because Junaid won the game", "Because Israa cheated"], pass: "Because it was completely random", hint: "Hint: Out of nowhere during board game night!" },
       365: { title: "THE LAST DAY ISN'T REALLY THE LAST", type: "pass", pass: "forever", hint: "Hint: The word that describes how long this story goes on...", content: "365 days of us. Every single piece leads right back to where we belong. Forever and always." }
     };
 
-    // Dynamically generate Unique Days 16 through 364
+    // Auto-generate unique days 16-364 with non-repeating titles and passwords
     const generatedDays = {};
-    const titleThemes = [
-      "Unspoken Magic", "Late Night Drives", "Inside Jokes", "Quiet Moments", "Endless Laughter",
-      "Shared Secrets", "The Unplanned Plot", "Coffee & Conversations", "Stargazing Thoughts",
-      "Our Favorite Song", "Unfiltered Talks", "The Little Details", "Comfortable Silences",
-      "A Memory to Keep", "Midnight Thoughts", "Simple Joy", "Sweet Coincidences", "Warm Hugs"
-    ];
-
-    const quizQuestions = [
+    const memoryThemes = ["Stolen Moments", "Late Night Drives", "Inside Jokes", "Quiet Warmth", "Endless Laughter", "Shared Secrets", "The Unplanned Plot", "Coffee & Talks", "Stargazing Thoughts", "Our Song on Repeat"];
+    const quizPool = [
       { q: "Who is more likely to start a random conversation late at night?", options: ["Israa", "Junaid", "Both equally", "Neither"], a: "Both equally" },
       { q: "What makes our story so uniquely ours?", options: ["The unplanned moments", "The endless laughs", "The deep talks", "All of the above"], a: "All of the above" },
-      { q: "What is the key to unlocking every good memory?", options: ["Patience", "Love", "A good joke", "Time together"], a: "Love" },
-      { q: "How many days are in this special grid?", options: ["100", "180", "365", "500"], a: "365" }
+      { q: "What is the key to unlocking every good memory?", options: ["Patience", "Love", "A good joke", "Time together"], a: "Love" }
     ];
 
     for (let i = 16; i < 365; i++) {
-      const theme = titleThemes[i % titleThemes.length];
-      const isQuiz = (i % 4 === 0); // Every 4th day gets a unique quiz
+      const theme = memoryThemes[(i - 16) % memoryThemes.length];
+      const isQuiz = (i % 3 === 0);
 
       if (isQuiz) {
-        const quizData = quizQuestions[i % quizQuestions.length];
-        generatedDays[i] = {
-          title: `${theme} #${i}`,
-          type: "quiz",
-          content: quizData.q,
-          options: quizData.options,
-          pass: quizData.a,
-          hint: `Hint: Think about ${theme.toLowerCase()} piece #${i}...`
-        };
+        const qData = quizPool[i % quizPool.length];
+        generatedDays[i] = { title: `${theme} (Part ${i})`, type: "quiz", content: qData.q, options: qData.options, pass: qData.a, hint: `Hint: Think about memory #${i}` };
       } else {
-        generatedDays[i] = {
-          title: `${theme} #${i}`,
-          type: "pass",
-          pass: `day${i}`,
-          hint: `Hint: Enter 'day${i}' to unlock this memory`,
-          content: `Piece #${i} of our journey. Another unforgettable moment stored in our story.`
-        };
+        generatedDays[i] = { title: `${theme} #${i}`, type: "pass", pass: `day${i}`, hint: `Hint: Enter 'day${i}' to unlock`, content: `Piece #${i} of our 365-day story. Another unforgettable moment stored in our journey.` };
       }
     }
 
-    // Combine custom story days and generated days seamlessly
     const customDays = { ...storyDays, ...generatedDays };
+
+    function enterSite() {
+      document.getElementById('landingPage').style.display = 'none';
+      document.getElementById('mainContent').style.display = 'block';
+      initGrid();
+      updateTimer();
+      setInterval(updateTimer, 1000);
+    }
+
+    function getUnlockedDayCount() {
+      const now = new Date();
+      const diffTime = now - startDate;
+      if (diffTime < 0) return 0;
+      return Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+    }
+
+    function updateTimer() {
+      const now = new Date();
+      const diffTime = startDate - now;
+      const timerBox = document.getElementById('timerBox');
+
+      if (diffTime > 0) {
+        const days = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diffTime / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diffTime / 1000 / 60) % 60);
+        const seconds = Math.floor((diffTime / 1000) % 60);
+        timerBox.innerText = `Unlocks in: ${days}d ${hours}h ${minutes}m ${seconds}s`;
+      } else {
+        const unlocked = getUnlockedDayCount();
+        timerBox.innerText = `Unlocked Days: ${Math.min(unlocked, 365)} / 365`;
+      }
+    }
+
+    function initGrid() {
+      const grid = document.getElementById('dayGrid');
+      grid.innerHTML = '';
+      const unlockedCount = getUnlockedDayCount();
+
+      for (let day = 1; day <= 365; day++) {
+        const card = document.createElement('div');
+        card.className = 'day-card';
+        const isUnlocked = day <= unlockedCount;
+
+        if (isUnlocked) {
+          card.classList.add('unlocked');
+          card.onclick = () => openDay(day);
+        } else {
+          card.classList.add('locked');
+          card.onclick = () => alert(`Day ${day} is locked until its scheduled date!`);
+        }
+
+        card.innerHTML = `
+          <div class="day-number">Day ${day}</div>
+          <div style="font-size:0.75rem; margin-top:4px;">${isUnlocked ? '🔓 Unlocked' : '🔒 Locked'}</div>
+        `;
+        grid.appendChild(card);
+      }
+    }
+
+    function openDay(day) {
+      const data = customDays[day];
+      const modalBody = document.getElementById('modalBody');
+
+      if (data.type === 'pass' || data.type === 'voice') {
+        modalBody.innerHTML = `
+          <h3 style="font-family:var(--font-handwriting); font-size:2.2rem; color:var(--warm-brown);">${data.title}</h3>
+          <p style="font-size:0.9rem; color:var(--text-muted); margin-top:5px;">${data.hint}</p>
+          <input type="text" id="passInput" class="modal-input" placeholder="Enter password..." /><br>
+          <button class="btn-action" onclick="checkPass(${day})">Unlock Memory</button>
+        `;
+      } else if (data.type === 'quiz') {
+        const optionsHTML = data.options.map(opt => 
+          `<button class="quiz-opt-btn" onclick="checkQuiz(${day}, '${opt.replace(/'/g, "\\'")}')">${opt}</button>`
+        ).join('');
+
+        modalBody.innerHTML = `
+          <h3 style="font-family:var(--font-handwriting); font-size:2.2rem; color:var(--warm-brown);">${data.title}</h3>
+          <p style="margin: 15px 0;">${data.content}</p>
+          <div class="quiz-options">${optionsHTML}</div>
+        `;
+      }
+      document.getElementById('modalOverlay').style.display = 'flex';
+    }
+
+    function checkPass(day) {
+      const input = document.getElementById('passInput').value.trim().toLowerCase();
+      const data = customDays[day];
+
+      if (input === data.pass.toLowerCase()) {
+        if (data.type === 'voice') {
+          showVoiceNote(data.title, data.content, data.audioFile);
+        } else {
+          showContent(data.title, data.content);
+        }
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        alert("Incorrect password! Try again.");
+      }
+    }
+
+    function checkQuiz(day, selectedOption) {
+      const data = customDays[day];
+      if (selectedOption === data.pass) {
+        showContent(data.title, `Correct! 🎉\n\n${data.hint}`);
+        confetti({ particleCount: 80, spread: 60, origin: { y: 0.6 } });
+      } else {
+        alert("Not quite! Try another answer.");
+      }
+    }
+
+    function showContent(title, content) {
+      document.getElementById('modalBody').innerHTML = `
+        <h3 style="font-family:var(--font-handwriting); font-size:2.2rem; color:var(--warm-brown); margin-bottom:10px;">${title}</h3>
+        <p style="line-height:1.6;">${content}</p>
+      `;
+    }
+
+    function showVoiceNote(title, content, audioFile) {
+      document.getElementById('modalBody').innerHTML = `
+        <h3 style="font-family:var(--font-handwriting); font-size:2.2rem; color:var(--warm-brown); margin-bottom:10px;">${title}</h3>
+        <p style="line-height:1.6; margin-bottom:10px;">${content}</p>
+        <audio controls>
+          <source src="${audioFile}" type="audio/mp4">
+          <source src="${audioFile}" type="audio/mpeg">
+          Your browser does not support playing this voice note.
+        </audio>
+      `;
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
